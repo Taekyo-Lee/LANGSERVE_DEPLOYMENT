@@ -111,7 +111,7 @@ LANGCHAIN_PROJECT={$LANGCHAIN_PROJECT}
 We expose port 8080 with the `-p 8080:8080` option.
 
 ```shell
-docker run -d --name {$container_name} --env-file env.list -p 8080:8080 my-langserve-app
+docker run -d --rm --name {$container_name} --env-file env.list -p 8080:8080 my-langserve-app
 ```
 
 we can view logs in real time by
