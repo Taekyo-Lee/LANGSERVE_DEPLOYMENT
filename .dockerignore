@@ -1,0 +1,3 @@
+*env.list*
+*.env*
+*__pycache__*
