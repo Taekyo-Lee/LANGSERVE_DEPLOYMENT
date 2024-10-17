@@ -68,16 +68,17 @@ packages = [
     { include = "app" },
 ]
 
-# Shared dependences all across packages
+# Shared Production dependences all across packages
 # After pydantic are sub packages. 'develop=true' means changes to this package will be reflected without needing to reinstall.
+# sub package's name must match that in the sub package's pyproject.toml file
 [tool.poetry.dependencies]
 python = "^3.11"
 uvicorn = "^0.23.2"
 langserve = {extras = ["server"], version = "^0.3.0"}
 pydantic = "^2.9.2"
-opensource-rag = {path = "package/opensource_rag", develop = true}
+on_prem_rag = {path = "packages/opensource_rag", develop = true}
 
-
+# Development dependencies (skipped if poetry install --no-dev)
 [tool.poetry.group.dev.dependencies]
 langchain-cli = "^0.0.31"
 
