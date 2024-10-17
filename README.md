@@ -1,5 +1,5 @@
 # Guide for LangServe deployment
-You can take a look at a complete example of LangServe deployment at https://github.com/Taekyo-Lee/LANGSERVE_EXAMPLES/tree/main/on_prem_rag
+You can take a look at a complete example of LangServe deployment at https://github.com/Taekyo-Lee/LANGSERVE_EXAMPLES/tree/main/on_prem_rag.
 
 ## Deactivate virtual environment
 It is strongly recommended using Docker to run this. By now, LangServe does not go with a virtual environment well.
