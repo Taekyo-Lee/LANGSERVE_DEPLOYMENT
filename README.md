@@ -1,13 +1,13 @@
 # Guide for LangServe deployment
 You can take a look at a complete example of LangServe deployment at https://github.com/Taekyo-Lee/LANGSERVE_EXAMPLES/tree/main/on_prem_rag.
 
-## Deactivate virtual environment
+## 1. Deactivate virtual environment
 It is strongly recommended using Docker to run this. By now, LangServe does not go with a virtual environment well.
 ```bash
 conda deactivate
 ```
 
-## (Optional) Installation
+## 2. (Optional) Installation
 Outside of any virtual environment, install the LangChain CLI if you haven't yet.
 
 ```bash
@@ -18,12 +18,12 @@ pip install -U langchain-cli
 
 It is highly likely that you see some dependency confilcts during installing it. But for most cases, it does not matter. 
 
-## Creating LangServe app
+## 3. Creating LangServe app
 ```bash
 langchain app new {$app_name} && cd {$app_name}
 ```
 
-## Populating 'packages' folder 
+## 4. Populating 'packages' folder 
 **Note 1**: In 'packages' folder, actual source codes - LangChain Runnables - live.
 
 **Note 2**: If you pull down source codes as reference from https://github.com/langchain-ai/langchain/tree/master/templates, 
@@ -36,7 +36,7 @@ langchain app add {$template_name}  # For instance, langchain app add pirate-spe
 langchain app add --repo {$git_user_name/$repo} --branch main  
 ```
 
-## Modifying app/server.py
+## 5. Modifying app/server.py
 'app/server.py' is the file responsible for running LangServe. To it, you need to add lines for
 
 1. importing the runnable to be invoked
@@ -52,7 +52,7 @@ add_routes(app, rag_chain, path="/pirate-speak")
 # By doing this, you can access LangServe app via 'http://localhost:8080/pirate-speak/playground'
 ```
 
-## Modifying pyproject.toml(s)
+## 6. Modifying pyproject.toml(s)
 In case that there is/are pyproject.toml(s) for packages in 'packages' folder, you need to modify them as well as the top-level pyproject.toml to make sure there will be no dependency conflicts.
 
 Sample of *root pyproject.toml* is as follows:
@@ -96,7 +96,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 ``` 
 
-## Building Docker image
+## 7. Building Docker image
 ```shell
 docker build . -t my-langserve-app
 ```
@@ -154,7 +154,7 @@ LANGCHAIN_PROJECT={$LANGCHAIN_PROJECT}
 HUGGING_FACE_HUB_TOKEN={$HUGGING_FACE_HUB_TOKEN}
 ```
 
-### Running the Image Locally
+### 8. Running the Image Locally
 
 We expose port 8080 with the `-p 8080:8080` option.
 
