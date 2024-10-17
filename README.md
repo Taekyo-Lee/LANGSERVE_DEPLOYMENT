@@ -54,6 +54,39 @@ add_routes(app, rag_chain, path="/pirate-speak")
 ## Modifying pyproject.toml(s)
 In case that there is/are pyproject.toml(s) for packages in 'packages' folder, you need to modify them as well as the top-level pyproject.toml to make sure there will be no dependency conflicts.
 
+Sample of *root pyproject.toml* is as follows:
+```shell
+# Root Project Definition
+# 'app/' directory is included as a package
+[tool.poetry]
+name = "on_prem_rag_docker"
+version = "0.1.0"
+description = ""
+authors = ["Jet Taekyo Lee <jetleee.1888@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "app" },
+]
+
+# Shared dependences all across packages
+# After pydantic are sub packages. 'develop=true' means changes to this package will be reflected without needing to reinstall.
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.23.2"
+langserve = {extras = ["server"], version = "^0.3.0"}
+pydantic = "^2.9.2"
+opensource-rag = {path = "package/opensource_rag", develop = true}
+
+
+[tool.poetry.group.dev.dependencies]
+langchain-cli = "^0.0.31"
+
+# poetry-core is used as the build backend, which is typical for Poetry-managed projects.
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+```
+
 When encountering poetry error, consider swaping out build-system in pyproject.toml file(s)
 ```python
 [build-system]
